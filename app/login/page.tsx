@@ -189,7 +189,7 @@ function LoginForm() {
           </button>
         </form>
 
-        <p className="text-center text-sm text-zinc-500">
+        <p className="text-center text-sm text-zinc-500 cursor-pointer">
           {isRegister ? "Ja tem uma conta?" : "Nao tem uma conta?"}{" "}
           <button
             type="button"
