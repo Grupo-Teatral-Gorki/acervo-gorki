@@ -1,22 +1,27 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
+import { getAuth, Auth } from "firebase/auth";
+import { getFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyC8QD31szOg1Pt-P-mQwyDsrcK3xoX9Mig",
+  authDomain: "acervo-gorki.firebaseapp.com",
+  projectId: "acervo-gorki",
+  storageBucket: "acervo-gorki.firebasestorage.app",
+  messagingSenderId: "617692033320",
+  appId: "1:617692033320:web:e4919b84e1a7f3f450601d",
 };
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+function getApp_() : FirebaseApp {
+  if (getApps().length > 0) return getApps()[0];
+  return initializeApp(firebaseConfig);
+}
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const app = getApp_();
 
-function getSecondaryApp() {
+export const auth: Auth = getAuth(app);
+export const db: Firestore = getFirestore(app);
+
+function getSecondaryApp(): FirebaseApp {
   try {
     return getApp("secondary");
   } catch {
@@ -24,4 +29,4 @@ function getSecondaryApp() {
   }
 }
 
-export const secondaryAuth = getAuth(getSecondaryApp());
+export const secondaryAuth: Auth = getAuth(getSecondaryApp());
